@@ -1,53 +1,53 @@
-const PARTY_NAME = "BAL Party | ";
+const PARTY_NAME = "Chanda Party | ";
 
 // Data Structure for Card Categories and Versions
 const cardThemes = [
     {
         category: "🔴 দুর্নীতি / লুটপাট থিম",
         versions: [
-            { name: PARTY_NAME + " Black Card – দেশ চুরির লাইসেন্স", id: "loot_black", gradient: "bg-gradient-to-r from-gray-900 via-black to-gray-800", icon: "fa-mask" },
-            { name: PARTY_NAME + " Elite – চাঁদাবাজির গোল্ডেন পাস", id: "loot_elite", gradient: "bg-gradient-to-r from-purple-900 to-indigo-900", icon: "fa-crown" },
-            { name: PARTY_NAME + " Gold – হাজার কোটি টাকার গ্যারান্টি", id: "loot_gold", gradient: "bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-700", icon: "fa-coins", textColor: "text-black" },
-            { name: PARTY_NAME + " Royal – রিজার্ভ খালি করার চাবি", id: "loot_royal", gradient: "bg-gradient-to-r from-blue-900 via-blue-800 to-blue-950", icon: "fa-gem" },
-            { name: PARTY_NAME + " Shadow – পাচার হওয়া টাকার ভল্ট", id: "loot_shadow", gradient: "bg-gradient-to-br from-gray-800 to-black", icon: "fa-user-secret" },
-            { name: PARTY_NAME + " Prime – কালো টাকা সাদা করার মেশিন", id: "loot_prime", gradient: "bg-gradient-to-r from-slate-900 to-slate-800", icon: "fa-money-bill-wave" },
-            { name: PARTY_NAME + " Power – টেন্ডারবাজির একক ক্ষমতা", id: "loot_power", gradient: "bg-gradient-to-r from-red-900 to-red-950", icon: "fa-fist-raised" },
-            { name: PARTY_NAME + " Vault – জনগণের পকেট কাটার যন্ত্র", id: "loot_vault", gradient: "bg-gradient-to-r from-emerald-900 to-gray-900", icon: "fa-dungeon" }
+            { name: "Black Card – দেশ চুরির লাইসেন্স", id: "loot_black", gradient: "bg-gradient-to-r from-gray-900 via-black to-gray-800", icon: "fa-mask" },
+            { name: "Elite – চাঁদাবাজির গোল্ডেন পাস", id: "loot_elite", gradient: "bg-gradient-to-r from-purple-900 to-indigo-900", icon: "fa-crown" },
+            { name: "Gold – হাজার কোটি টাকার গ্যারান্টি", id: "loot_gold", gradient: "bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-700", icon: "fa-coins", textColor: "text-black" },
+            { name: "Royal – রিজার্ভ খালি করার চাবি", id: "loot_royal", gradient: "bg-gradient-to-r from-blue-900 via-blue-800 to-blue-950", icon: "fa-gem" },
+            { name: "Shadow – পাচার হওয়া টাকার ভল্ট", id: "loot_shadow", gradient: "bg-gradient-to-br from-gray-800 to-black", icon: "fa-user-secret" },
+            { name: "Prime – কালো টাকা সাদা করার মেশিন", id: "loot_prime", gradient: "bg-gradient-to-r from-slate-900 to-slate-800", icon: "fa-money-bill-wave" },
+            { name: "Power – টেন্ডারবাজির একক ক্ষমতা", id: "loot_power", gradient: "bg-gradient-to-r from-red-900 to-red-950", icon: "fa-fist-raised" },
+            { name: "Vault – জনগণের পকেট কাটার যন্ত্র", id: "loot_vault", gradient: "bg-gradient-to-r from-emerald-900 to-gray-900", icon: "fa-dungeon" }
         ]
     },
     {
         category: "👨‍👩‍👧‍👦 ফ্যামিলি / সিন্ডিকেট থিম",
         versions: [
-            { name: PARTY_NAME + " Family Card – বাপ-বেটার জমিদারী", id: "fam_basic", gradient: "bg-gradient-to-r from-teal-700 to-teal-900", icon: "fa-users" },
-            { name: PARTY_NAME + " Dynasty – রাজতন্ত্রের নতুন রূপ", id: "fam_dynasty", gradient: "bg-gradient-to-r from-slate-300 via-slate-400 to-slate-500", icon: "fa-chess-king", textColor: "text-black" },
-            { name: PARTY_NAME + " Bloodline – উত্তরাধিকার সূত্রে দুর্নীতি", id: "fam_blood", gradient: "bg-gradient-to-r from-red-800 to-red-900", icon: "fa-dna" },
-            { name: PARTY_NAME + " Legacy – হাওয়া ভবনের উত্তরাধিকার", id: "fam_legacy", gradient: "bg-gradient-to-r from-amber-700 to-amber-900", icon: "fa-scroll" },
-            { name: PARTY_NAME + " Clan – স্বজনপ্রীতির সেরা উদাহরণ", id: "fam_clan", gradient: "bg-gradient-to-r from-indigo-800 to-purple-900", icon: "fa-shield-alt" },
-            { name: PARTY_NAME + " Empire – দুর্নীতির সাম্রাজ্য", id: "fam_empire", gradient: "bg-gradient-to-r from-yellow-700 to-yellow-900", icon: "fa-landmark" },
-            { name: PARTY_NAME + " Syndicate – বাজার সিন্ডিকেটের গডফাদার", id: "fam_syndicate", gradient: "bg-gradient-to-r from-green-800 to-gray-900", icon: "fa-handshake" },
-            { name: PARTY_NAME + " Cartel – মাফিয়া তন্ত্রের প্রতীক", id: "fam_cartel", gradient: "bg-gradient-to-r from-stone-800 to-stone-950", icon: "fa-skull-crossbones" },
-            { name: PARTY_NAME + " Condom – স্ক্যান্ডাল প্রোটেকশন শিল্ড", id: "fam_condom", gradient: "bg-gradient-to-r from-pink-700 to-rose-900", icon: "fa-shield-virus" }
+            { name: "Family Card – বাপ-বেটার জমিদারী", id: "fam_basic", gradient: "bg-gradient-to-r from-teal-700 to-teal-900", icon: "fa-users" },
+            { name: "Dynasty – রাজতন্ত্রের নতুন রূপ", id: "fam_dynasty", gradient: "bg-gradient-to-r from-slate-300 via-slate-400 to-slate-500", icon: "fa-chess-king", textColor: "text-black" },
+            { name: "Bloodline – উত্তরাধিকার সূত্রে দুর্নীতি", id: "fam_blood", gradient: "bg-gradient-to-r from-red-800 to-red-900", icon: "fa-dna" },
+            { name: "Legacy – হাওয়া ভবনের উত্তরাধিকার", id: "fam_legacy", gradient: "bg-gradient-to-r from-amber-700 to-amber-900", icon: "fa-scroll" },
+            { name: "Clan – স্বজনপ্রীতির সেরা উদাহরণ", id: "fam_clan", gradient: "bg-gradient-to-r from-indigo-800 to-purple-900", icon: "fa-shield-alt" },
+            { name: "Empire – দুর্নীতির সাম্রাজ্য", id: "fam_empire", gradient: "bg-gradient-to-r from-yellow-700 to-yellow-900", icon: "fa-landmark" },
+            { name: "Syndicate – বাজার সিন্ডিকেটের গডফাদার", id: "fam_syndicate", gradient: "bg-gradient-to-r from-green-800 to-gray-900", icon: "fa-handshake" },
+            { name: "Cartel – মাফিয়া তন্ত্রের প্রতীক", id: "fam_cartel", gradient: "bg-gradient-to-r from-stone-800 to-stone-950", icon: "fa-skull-crossbones" },
+            { name: "Condom – স্ক্যান্ডাল প্রোটেকশন শিল্ড", id: "fam_condom", gradient: "bg-gradient-to-r from-pink-700 to-rose-900", icon: "fa-shield-virus" }
         ]
     },
     {
         category: "🌾 কৃষি / গ্রামীণ থিম (স্যাটায়ার)",
         versions: [
-            { name: PARTY_NAME + " Agro Card – সারের দামে আগুন", id: "agro_loot", gradient: "bg-gradient-to-r from-green-700 to-green-900", icon: "fa-tractor" },
-            { name: PARTY_NAME + " Krishi Elite – কৃষকের পেটে লাথি", id: "agro_elite", gradient: "bg-gradient-to-r from-lime-700 to-green-800", icon: "fa-leaf" },
-            { name: PARTY_NAME + " Farmer Gold – ভর্তুকি চুরির কার্ড", id: "agro_gold", gradient: "bg-gradient-to-r from-yellow-500 to-green-600", icon: "fa-wheat" },
-            { name: PARTY_NAME + " Rural Shadow – গ্রাম লুটে শহর ভোগ", id: "agro_shadow", gradient: "bg-gradient-to-r from-stone-600 to-stone-800", icon: "fa-cloud-moon" },
-            { name: PARTY_NAME + " Harvest Black – ফসলের লাভ মধ্যস্বত্বভোগীর", id: "agro_black", gradient: "bg-gradient-to-r from-gray-800 via-green-900 to-black", icon: "fa-sickle" }
+            { name: "Agro Card – সারের দামে আগুন", id: "agro_loot", gradient: "bg-gradient-to-r from-green-700 to-green-900", icon: "fa-tractor" },
+            { name: "Krishi Elite – কৃষকের পেটে লাথি", id: "agro_elite", gradient: "bg-gradient-to-r from-lime-700 to-green-800", icon: "fa-leaf" },
+            { name: "Farmer Gold – ভর্তুকি চুরির কার্ড", id: "agro_gold", gradient: "bg-gradient-to-r from-yellow-500 to-green-600", icon: "fa-wheat" },
+            { name: "Rural Shadow – গ্রাম লুটে শহর ভোগ", id: "agro_shadow", gradient: "bg-gradient-to-r from-stone-600 to-stone-800", icon: "fa-cloud-moon" },
+            { name: "Harvest Black – ফসলের লাভ মধ্যস্বত্বভোগীর", id: "agro_black", gradient: "bg-gradient-to-r from-gray-800 via-green-900 to-black", icon: "fa-sickle" }
         ]
     },
     {
         category: "🧠 ব্যঙ্গাত্মক (Satirical)",
         versions: [
-            { name: PARTY_NAME + " Corrupt+ – ঘুষ ছাড়া ফাইল নড়ে না", id: "sat_corrupt", gradient: "bg-gradient-to-r from-red-700 via-orange-900 to-red-900", icon: "fa-biohazard" },
-            { name: PARTY_NAME + " Dirty Money – রক্তচোষা মানিব্যাগ", id: "sat_dirty", gradient: "bg-gradient-to-r from-emerald-900 via-gray-800 to-black", icon: "fa-trash-alt" },
-            { name: PARTY_NAME + " Power Loot – খাম্বা ও লোডশেডিং বাণিজ্য", id: "sat_power", gradient: "bg-gradient-to-r from-orange-700 to-red-800", icon: "fa-bolt" },
-            { name: PARTY_NAME + " Mafia Card – আইনের ঊর্ধ্বে আমরা", id: "sat_mafia", gradient: "bg-gradient-to-r from-gray-900 via-red-900 to-black", icon: "fa-hat-cowboy" },
-            { name: PARTY_NAME + " Shadow State – প্যারালাল সরকার", id: "sat_state", gradient: "bg-gradient-to-r from-slate-800 to-gray-900", icon: "fa-building" },
-            { name: PARTY_NAME + " Deep State – অদৃশ্য হাতের ইশারা", id: "sat_deep", gradient: "bg-gradient-to-r from-indigo-950 to-black", icon: "fa-eye" }
+            { name: "Corrupt+ – ঘুষ ছাড়া ফাইল নড়ে না", id: "sat_corrupt", gradient: "bg-gradient-to-r from-red-700 via-orange-900 to-red-900", icon: "fa-biohazard" },
+            { name: "Dirty Money – রক্তচোষা মানিব্যাগ", id: "sat_dirty", gradient: "bg-gradient-to-r from-emerald-900 via-gray-800 to-black", icon: "fa-trash-alt" },
+            { name: "Power Loot – খাম্বা ও লোডশেডিং বাণিজ্য", id: "sat_power", gradient: "bg-gradient-to-r from-orange-700 to-red-800", icon: "fa-bolt" },
+            { name: "Mafia Card – আইনের ঊর্ধ্বে আমরা", id: "sat_mafia", gradient: "bg-gradient-to-r from-gray-900 via-red-900 to-black", icon: "fa-hat-cowboy" },
+            { name: "Shadow State – প্যারালাল সরকার", id: "sat_state", gradient: "bg-gradient-to-r from-slate-800 to-gray-900", icon: "fa-building" },
+            { name: "Deep State – অদৃশ্য হাতের ইশারা", id: "sat_deep", gradient: "bg-gradient-to-r from-indigo-950 to-black", icon: "fa-eye" }
         ]
     }
 ];
@@ -136,7 +136,7 @@ function updateTheme() {
     
     // Parse Name and Edition
     // Expected format: "Name – Edition"
-    const fullText = selectedOption.textContent;
+    const fullText = PARTY_NAME + selectedOption.textContent;
     let cardName = fullText;
     let editionText = "";
 
