@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Card Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tiro Bangla', serif;
+        }
+        .font-mono-card {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .card-shadow {
+            box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.5);
+        }
+        /* Chip Styling */
+        .chip {
+            background: linear-gradient(135deg, #e2e2e2 0%, #b8b8b8 50%, #dcdcdc 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .chip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 30%;
+            width: 40%;
+            border-left: 1px solid rgba(0,0,0,0.2);
+            border-right: 1px solid rgba(0,0,0,0.2);
+        }
+        .chip::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 30%;
+            height: 40%;
+            border-top: 1px solid rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(0,0,0,0.2);
+        }
+        /* Pattern Overlay */
+        .pattern-overlay {
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+            mask-image: linear-gradient(to bottom right, rgba(0,0,0,1), rgba(0,0,0,0.3));
+            -webkit-mask-image: linear-gradient(to bottom right, rgba(0,0,0,1), rgba(0,0,0,0.3));
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="container mx-auto max-w-6xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            
+            <!-- Controls Section -->
+            <div class="bg-white p-6 rounded-2xl shadow-xl">
+                <h1 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">স্মার্ট দুর্নীতি কার্ড জেনারেটর</h1>
+                
+                <div class="space-y-4">
+                    <!-- Card Version Selection -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">কার্ড ভার্সন ও স্লোগান (Theme & Slogan)</label>
+                        <select id="cardVersion" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                            <!-- Options will be populated by JS -->
+                        </select>
+                    </div>
+
+                    <!-- Input Fields -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">নাম (Card Holder)</label>
+                        <input type="text" id="cardName" placeholder="আপনার নাম লিখুন" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-sm font-medium text-gray-700">কার্ড নাম্বার (16 digits)</label>
+                            <button id="regenerateBtn" class="text-xs text-blue-600 hover:text-blue-800 flex items-center gap-1 bg-blue-50 px-2 py-1 rounded transition">
+                                <i class="fas fa-sync-alt"></i> অটো জেনারেট
+                            </button>
+                        </div>
+                        <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 font-mono">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">মেয়াদ (Valid Thru)</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                            <input type="text" id="cardCvv" placeholder="123" maxlength="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 font-mono">
+                        </div>
+                    </div>
+
+                    <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center gap-2 mt-4">
+                        <i class="fas fa-download"></i> কার্ড ডাউনলোড করুন
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="flex flex-col items-center justify-center space-y-6 sticky top-6">
+                <h2 class="text-xl font-semibold text-gray-600">প্রিভিউ (Preview)</h2>
+                
+                <!-- The Card -->
+                <div id="cardPreview" class="relative w-[400px] h-[250px] rounded-2xl p-6 text-white card-shadow transition-all duration-500 bg-gradient-to-r from-gray-800 to-gray-900 select-none overflow-hidden">
+                    
+                    <!-- Background Pattern (Optional overlay) -->
+                    <div class="absolute inset-0 opacity-20 pattern-overlay pointer-events-none"></div>
+
+                    <!-- Watermark -->
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pointer-events-none overflow-hidden">
+                        <div id="cardWatermark" class="text-white opacity-20 text-5xl font-bold whitespace-nowrap transform -rotate-12 select-none" style="font-family: 'Tiro Bangla', serif;">
+                            লুটপাট এডিশন
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <!-- Top Row: Chip & Contactless -->
+                        <div class="flex justify-between items-start">
+                            <div class="w-12 h-10 chip border border-gray-400"></div>
+                            <div class="text-right">
+                                <i class="fas fa-wifi text-2xl opacity-80 rotate-90"></i>
+                                <div id="bankLogo" class="text-sm font-bold mt-1 opacity-90 tracking-wider">BNP BANK</div>
+                            </div>
+                        </div>
+
+                        <!-- Middle: Card Number -->
+                        <div class="mt-4">
+                            <div id="previewNumber" class="text-2xl tracking-widest font-mono-card drop-shadow-md">0000 0000 0000 0000</div>
+                        </div>
+
+                        <!-- Bottom: Info -->
+                        <div class="flex justify-between items-end mt-2">
+                            <div>
+                                <div class="text-[10px] uppercase opacity-70 mb-0.5">Card Holder</div>
+                                <div id="previewName" class="font-bold text-lg tracking-wide uppercase drop-shadow-sm w-48 leading-tight break-words">YOUR NAME</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-[10px] uppercase opacity-70 mb-0.5">Valid Thru</div>
+                                <div id="previewExpiry" class="font-mono-card text-lg drop-shadow-sm">MM/YY</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-lg text-red-500 text-center">
+                    * কার্ডের লোভ বা সুবিধায় প্রভাবিত হয়ে ভোট দেবেন না। দায়িত্বশীল হন। এটি একটি সতর্কতামূলক কার্ড জেনারেটার।
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
